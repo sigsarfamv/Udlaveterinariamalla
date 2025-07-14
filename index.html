@@ -46,4 +46,51 @@
     }
   </script>
 </body>
+  const ramos = {
+      comunicacion: { aprobado: false },
+      matematica: { aprobado: false },
+      introduccion: { aprobado: false },
+      biologia: { aprobado: false },
+      quimica: { aprobado: false },
+      // Semestre 2
+      ingles1: { aprobado: false, siguiente: [] },
+      bioestadistica: { aprobado: false, prereq: ['matematica'], siguiente: [] },
+      anatCanino: { aprobado: false, prereq: [], siguiente: [] },
+      histo: { aprobado: false, prereq: [], siguiente: [] },
+      bioquimica: { aprobado: false, prereq: ['quimica'], siguiente: [] }
+    };
+
+    function aprobar(id) {
+      const ramo = document.getElementById(id);
+      if (ramo.classList.contains('bloqueado')) return;
+      ramos[id].aprobado = true;
+      ramo.classList.add('aprobado');
+
+      // Revisa si se pueden desbloquear ramos con prerequisitos
+      for (let key in ramos) {
+        const ramoData = ramos[key];
+        const div = document.getElementById(key);
+        if (ramoData.aprobado || !ramoData.prereq) continue;
+
+        const ready = ramoData.prereq.every(p => ramos[p].aprobado);
+        if (ready && div.classList.contains('oculto')) {
+          div.classList.remove('oculto', 'bloqueado');
+        }
+      }
+
+      // Desbloquea ramos sin prerequisitos ocultos
+      for (let key in ramos) {
+        const div = document.getElementById(key);
+        if (!ramos[key].prereq && div.classList.contains('oculto')) {
+          div.classList.remove('oculto', 'bloqueado');
+        }
+      }
+    }
 </html>
+<h2>📘 Semestre 2 - Medicina Veterinaria</h2>
+
+<div class="ramo general bloqueado" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
+<div class="ramo general bloqueado oculto" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística (req: Matemática)</div>
+<div class="ramo profesional bloqueado oculto" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
+<div class="ramo disciplinario bloqueado oculto" id="histo" onclick="aprobar('histo')">Histomorfobiología</div>
+<div class="ramo disciplinario bloqueado oculto" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica (req: Química)</div>
