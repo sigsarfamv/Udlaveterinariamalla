@@ -49,7 +49,8 @@
     }
 
     .bloqueado {
-      opacity: 0.5;
+      background-color: #e0e0e0 !important;
+      color: #777 !important;
       cursor: not-allowed;
     }
 
@@ -63,10 +64,10 @@
       color: #000 !important;
     }
 
-    /* Colores pastel */
-    .general { background-color: #cce5ff; color: #004085; }       /* Celeste pastel */
-    .profesional { background-color: #f8d7da; color: #721c24; }   /* Rosado pastel */
-    .disciplinario { background-color: #d4edda; color: #155724; } /* Verde pastel */
+    /* Colores pastel originales */
+    .general { background-color: #cce5ff; color: #004085; }
+    .profesional { background-color: #f8d7da; color: #721c24; }
+    .disciplinario { background-color: #d4edda; color: #155724; }
   </style>
 </head>
 
@@ -88,11 +89,11 @@
     <!-- SEMESTRE 2 -->
     <div class="semestre">
       <h2>Semestre 2</h2>
-      <div class="ramo general bloqueado oculto" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
-      <div class="ramo general bloqueado oculto" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística</div>
-      <div class="ramo profesional bloqueado oculto" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
-      <div class="ramo disciplinario bloqueado oculto" id="histo" onclick="aprobar('histo')">Histoembriología</div>
-      <div class="ramo disciplinario bloqueado oculto" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica</div>
+      <div class="ramo general" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
+      <div class="ramo general bloqueado" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística</div>
+      <div class="ramo profesional" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
+      <div class="ramo disciplinario" id="histo" onclick="aprobar('histo')">Histoembriología</div>
+      <div class="ramo disciplinario bloqueado" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica</div>
     </div>
 
   </div>
@@ -100,11 +101,11 @@
   <script>
     const ramos = {
       // Semestre 1
-      comunicacion: { aprobado: false },
-      matematica: { aprobado: false },
-      introduccion: { aprobado: false },
-      biologia: { aprobado: false },
-      quimica: { aprobado: false },
+      comunicacion: { aprobado: false, prereq: [] },
+      matematica: { aprobado: false, prereq: [] },
+      introduccion: { aprobado: false, prereq: [] },
+      biologia: { aprobado: false, prereq: [] },
+      quimica: { aprobado: false, prereq: [] },
       // Semestre 2
       ingles1: { aprobado: false, prereq: [] },
       bioestadistica: { aprobado: false, prereq: ['matematica'] },
@@ -123,28 +124,26 @@
       for (let key in ramos) {
         const datos = ramos[key];
         const div = document.getElementById(key);
-        if (datos.aprobado || !datos.prereq) continue;
+        if (datos.aprobado || !datos.prereq?.length) continue;
 
         const requisitosOk = datos.prereq.every(pr => ramos[pr].aprobado);
-        if (requisitosOk && div.classList.contains('oculto')) {
-          div.classList.remove('oculto', 'bloqueado');
-        }
-      }
-
-      for (let key in ramos) {
-        const div = document.getElementById(key);
-        if (!ramos[key].prereq && div.classList.contains('oculto')) {
-          div.classList.remove('oculto', 'bloqueado');
+        if (requisitosOk) {
+          div.classList.remove('bloqueado');
         }
       }
     }
 
-    // Mostrar ramos sin prerrequisitos al cargar
+    // Al cargar la página, dejar en gris los que tienen requisitos no cumplidos
     window.onload = () => {
       for (let key in ramos) {
         const div = document.getElementById(key);
-        if (!ramos[key].prereq && div.classList.contains('oculto')) {
-          div.classList.remove('oculto', 'bloqueado');
+        const datos = ramos[key];
+
+        if (datos.prereq?.length > 0) {
+          const requisitosOk = datos.prereq.every(pr => ramos[pr].aprobado);
+          if (!requisitosOk) {
+            div.classList.add('bloqueado');
+          }
         }
       }
     };
