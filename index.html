@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Malla Curricular Interactiva - Veterinaria</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .ramo {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+    .bloqueado { opacity: 0.5; cursor: not-allowed; }
+    .general { background-color: #4a90e2; }     /* Azul: Ámbito General */
+    .profesional { background-color: #d0021b; } /* Rojo: Ámbito Profesional */
+    .disciplinario { background-color: #417505; } /* Verde: Ámbito Disciplinario */
+    .aprobado { text-decoration: line-through; background-color: #7ed321 !important; }
+  </style>
+</head>
+<body>
+  <h2>🧪 Semestre 1 - Medicina Veterinaria</h2>
+
+  <div class="ramo general" id="comunicacion" onclick="aprobar('comunicacion')">Taller de Comunicación Oral y Escrita</div>
+  <div class="ramo general" id="matematica" onclick="aprobar('matematica')">Matemática General</div>
+  <div class="ramo profesional" id="introduccion" onclick="aprobar('introduccion')">Introducción a la Medicina Veterinaria</div>
+  <div class="ramo disciplinario" id="biologia" onclick="aprobar('biologia')">Biología Celular</div>
+  <div class="ramo disciplinario" id="quimica" onclick="aprobar('quimica')">Química</div>
+
+  <script>
+    const ramos = {
+      comunicacion: { aprobado: false },
+      matematica: { aprobado: false },
+      introduccion: { aprobado: false },
+      biologia: { aprobado: false },
+      quimica: { aprobado: false }
+    };
+
+    function aprobar(id) {
+      const ramo = document.getElementById(id);
+      if (ramo.classList.contains('bloqueado')) return;
+      ramos[id].aprobado = true;
+      ramo.classList.add('aprobado');
+    }
+  </script>
+</body>
+</html>
