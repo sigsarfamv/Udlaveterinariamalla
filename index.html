@@ -7,12 +7,13 @@
     body {
       font-family: Arial, sans-serif;
       padding: 30px;
-      background-color: #f4f4f4;
+      background-color: #f8f8f8;
+      max-width: 800px;
+      margin: auto;
     }
 
-    h2 {
+    h1, h2 {
       color: #333;
-      margin-top: 40px;
     }
 
     .ramo {
@@ -36,7 +37,7 @@
 
     .aprobado {
       text-decoration: line-through;
-      background-color: #7ed321 !important;
+      background-color: #a5d6a7 !important;
       color: #000 !important;
     }
 
@@ -67,11 +68,13 @@
 
   <script>
     const ramos = {
+      // Semestre 1
       comunicacion: { aprobado: false },
       matematica: { aprobado: false },
       introduccion: { aprobado: false },
       biologia: { aprobado: false },
       quimica: { aprobado: false },
+      // Semestre 2
       ingles1: { aprobado: false, prereq: [] },
       bioestadistica: { aprobado: false, prereq: ['matematica'] },
       anatCanino: { aprobado: false, prereq: [] },
@@ -82,21 +85,23 @@
     function aprobar(id) {
       const ramo = document.getElementById(id);
       if (ramo.classList.contains('bloqueado')) return;
+
       ramos[id].aprobado = true;
       ramo.classList.add('aprobado');
 
+      // Desbloqueo de ramos con prerrequisitos
       for (let key in ramos) {
-        const ramoData = ramos[key];
+        const datos = ramos[key];
         const div = document.getElementById(key);
-        if (ramoData.aprobado || !ramoData.prereq) continue;
+        if (datos.aprobado || !datos.prereq) continue;
 
-        const ready = ramoData.prereq.every(p => ramos[p].aprobado);
-        if (ready && div.classList.contains('oculto')) {
+        const requisitosOk = datos.prereq.every(pr => ramos[pr].aprobado);
+        if (requisitosOk && div.classList.contains('oculto')) {
           div.classList.remove('oculto', 'bloqueado');
         }
       }
 
-      // Mostrar automáticamente los sin prerequisitos
+      // Desbloquear los que no tienen requisitos
       for (let key in ramos) {
         const div = document.getElementById(key);
         if (!ramos[key].prereq && div.classList.contains('oculto')) {
@@ -105,7 +110,7 @@
       }
     }
 
-    // Mostrar ramos sin prerequisitos al cargar
+    // Mostrar automáticamente los sin prerrequisitos al cargar
     window.onload = () => {
       for (let key in ramos) {
         const div = document.getElementById(key);
