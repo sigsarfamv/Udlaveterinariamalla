@@ -4,149 +4,200 @@
   <meta charset="UTF-8" />
   <title>Malla Curricular Interactiva - Medicina Veterinaria</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background-color: #fefefe;
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    .semestres {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-
+    body { font-family: Arial, sans-serif; padding: 30px; background-color: #fefefe; }
+    h1 { text-align: center; color: #333; }
+    .semestres { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
     .semestre {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      width: 220px;
-      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px;
+      padding: 15px; width: 240px; box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
     }
-
-    .semestre h2 {
-      text-align: center;
-      font-size: 1.2em;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
+    .semestre h2 { text-align: center; font-size: 1.2em; color: #555; margin-bottom: 10px; }
     .ramo {
-      padding: 10px;
-      margin: 6px 0;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.3s ease;
+      padding: 10px; margin: 6px 0; border-radius: 6px; font-weight: bold;
+      cursor: pointer; text-align: center; transition: all 0.3s ease;
     }
-
     .bloqueado {
       background-color: #e0e0e0 !important;
       color: #777 !important;
       cursor: not-allowed;
     }
-
-    .oculto {
-      display: none;
-    }
-
     .aprobado {
       text-decoration: line-through;
       background-color: #b2dfdb !important;
       color: #000 !important;
     }
-
-    /* Colores pastel originales */
     .general { background-color: #cce5ff; color: #004085; }
     .profesional { background-color: #f8d7da; color: #721c24; }
     .disciplinario { background-color: #d4edda; color: #155724; }
+    .practica { background-color: #e6ccff; color: #4b0082; }
   </style>
 </head>
-
 <body>
-  <h1>📘 Malla Curricular Medicina Veterinaria</h1>
+<h1>📘 Malla Curricular Medicina Veterinaria</h1>
+<div class="semestres">
+<div class="semestre">
+<h2>Semestre 1</h2>
+<div class="ramo general" id="matematica" onclick="aprobar('matematica')">Matemática General</div>
+<div class="ramo general" id="comunicacion" onclick="aprobar('comunicacion')">Taller de Comunicación Oral y Escrita</div>
+<div class="ramo disciplinario" id="quimica" onclick="aprobar('quimica')">Química</div>
+<div class="ramo disciplinario" id="biologia" onclick="aprobar('biologia')">Biología Celular</div>
+<div class="ramo profesional" id="introduccion" onclick="aprobar('introduccion')">Introducción a la Medicina Veterinaria</div>
+</div>
+<div class="semestre">
+<h2>Semestre 2</h2>
+<div class="ramo general" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
+<div class="ramo general" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística</div>
+<div class="ramo profesional" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
+<div class="ramo disciplinario" id="histo" onclick="aprobar('histo')">Histoembriología</div>
+<div class="ramo disciplinario" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica</div>
+</div>
+<div class="semestre">
+<h2>Semestre 3</h2>
+<div class="ramo general" id="ingles2" onclick="aprobar('ingles2')">Inglés II</div>
+<div class="ramo profesional" id="anatComparada" onclick="aprobar('anatComparada')">Anatomía Comparada</div>
+<div class="ramo disciplinario" id="zoologia" onclick="aprobar('zoologia')">Zoología</div>
+<div class="ramo disciplinario" id="fisio" onclick="aprobar('fisio')">Fisiología Animal</div>
+<div class="ramo disciplinario" id="medioambiente" onclick="aprobar('medioambiente')">Medio Ambiente y Gestión Ambiental</div>
+</div>
+<div class="semestre">
+<h2>Semestre 4</h2>
+<div class="ramo disciplinario" id="ramo41" onclick="aprobar('ramo41')">Ramo Simulado 4-1</div>
+<div class="ramo disciplinario" id="ramo42" onclick="aprobar('ramo42')">Ramo Simulado 4-2</div>
+<div class="ramo profesional" id="ramo43" onclick="aprobar('ramo43')">Ramo Simulado 4-3</div>
+<div class="ramo disciplinario" id="ramo44" onclick="aprobar('ramo44')">Ramo Simulado 4-4</div>
+<div class="ramo disciplinario" id="ramo45" onclick="aprobar('ramo45')">Ramo Simulado 4-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 5</h2>
+<div class="ramo disciplinario" id="ramo51" onclick="aprobar('ramo51')">Ramo Simulado 5-1</div>
+<div class="ramo disciplinario" id="ramo52" onclick="aprobar('ramo52')">Ramo Simulado 5-2</div>
+<div class="ramo profesional" id="ramo53" onclick="aprobar('ramo53')">Ramo Simulado 5-3</div>
+<div class="ramo disciplinario" id="ramo54" onclick="aprobar('ramo54')">Ramo Simulado 5-4</div>
+<div class="ramo disciplinario" id="ramo55" onclick="aprobar('ramo55')">Ramo Simulado 5-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 6</h2>
+<div class="ramo disciplinario" id="ramo61" onclick="aprobar('ramo61')">Ramo Simulado 6-1</div>
+<div class="ramo disciplinario" id="ramo62" onclick="aprobar('ramo62')">Ramo Simulado 6-2</div>
+<div class="ramo profesional" id="ramo63" onclick="aprobar('ramo63')">Ramo Simulado 6-3</div>
+<div class="ramo disciplinario" id="ramo64" onclick="aprobar('ramo64')">Ramo Simulado 6-4</div>
+<div class="ramo disciplinario" id="ramo65" onclick="aprobar('ramo65')">Ramo Simulado 6-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 7</h2>
+<div class="ramo disciplinario" id="ramo71" onclick="aprobar('ramo71')">Ramo Simulado 7-1</div>
+<div class="ramo disciplinario" id="ramo72" onclick="aprobar('ramo72')">Ramo Simulado 7-2</div>
+<div class="ramo profesional" id="ramo73" onclick="aprobar('ramo73')">Ramo Simulado 7-3</div>
+<div class="ramo disciplinario" id="ramo74" onclick="aprobar('ramo74')">Ramo Simulado 7-4</div>
+<div class="ramo disciplinario" id="ramo75" onclick="aprobar('ramo75')">Ramo Simulado 7-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 8</h2>
+<div class="ramo disciplinario" id="ramo81" onclick="aprobar('ramo81')">Ramo Simulado 8-1</div>
+<div class="ramo disciplinario" id="ramo82" onclick="aprobar('ramo82')">Ramo Simulado 8-2</div>
+<div class="ramo profesional" id="ramo83" onclick="aprobar('ramo83')">Ramo Simulado 8-3</div>
+<div class="ramo disciplinario" id="ramo84" onclick="aprobar('ramo84')">Ramo Simulado 8-4</div>
+<div class="ramo disciplinario" id="ramo85" onclick="aprobar('ramo85')">Ramo Simulado 8-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 9</h2>
+<div class="ramo disciplinario" id="ramo91" onclick="aprobar('ramo91')">Ramo Simulado 9-1</div>
+<div class="ramo disciplinario" id="ramo92" onclick="aprobar('ramo92')">Ramo Simulado 9-2</div>
+<div class="ramo profesional" id="ramo93" onclick="aprobar('ramo93')">Ramo Simulado 9-3</div>
+<div class="ramo disciplinario" id="ramo94" onclick="aprobar('ramo94')">Ramo Simulado 9-4</div>
+<div class="ramo disciplinario" id="ramo95" onclick="aprobar('ramo95')">Ramo Simulado 9-5</div>
+</div>
+<div class="semestre">
+<h2>Semestre 10</h2>
+<div class="ramo disciplinario" id="ramo101" onclick="aprobar('ramo101')">Ramo Simulado 10-1</div>
+<div class="ramo disciplinario" id="ramo102" onclick="aprobar('ramo102')">Ramo Simulado 10-2</div>
+<div class="ramo profesional" id="ramo103" onclick="aprobar('ramo103')">Ramo Simulado 10-3</div>
+<div class="ramo disciplinario" id="ramo104" onclick="aprobar('ramo104')">Ramo Simulado 10-4</div>
+<div class="ramo disciplinario" id="ramo105" onclick="aprobar('ramo105')">Ramo Simulado 10-5</div>
+</div>
 
-  <div class="semestres">
+</div>
+<script>
+const ramos = {
+"matematica": { nombre: "Matemática General", tipo: "general", semestre: 1, prereq: [], aprobado: false },
+"comunicacion": { nombre: "Taller de Comunicación Oral y Escrita", tipo: "general", semestre: 1, prereq: [], aprobado: false },
+"quimica": { nombre: "Química", tipo: "disciplinario", semestre: 1, prereq: [], aprobado: false },
+"biologia": { nombre: "Biología Celular", tipo: "disciplinario", semestre: 1, prereq: [], aprobado: false },
+"introduccion": { nombre: "Introducción a la Medicina Veterinaria", tipo: "profesional", semestre: 1, prereq: [], aprobado: false },
+"ingles1": { nombre: "Inglés I", tipo: "general", semestre: 2, prereq: [], aprobado: false },
+"bioestadistica": { nombre: "Bioestadística", tipo: "general", semestre: 2, prereq: ['matematica'], aprobado: false },
+"anatCanino": { nombre: "Anatomía del Canino", tipo: "profesional", semestre: 2, prereq: [], aprobado: false },
+"histo": { nombre: "Histoembriología", tipo: "disciplinario", semestre: 2, prereq: [], aprobado: false },
+"bioquimica": { nombre: "Bioquímica", tipo: "disciplinario", semestre: 2, prereq: ['quimica'], aprobado: false },
+"ingles2": { nombre: "Inglés II", tipo: "general", semestre: 3, prereq: ['ingles1'], aprobado: false },
+"anatComparada": { nombre: "Anatomía Comparada", tipo: "profesional", semestre: 3, prereq: ['anatCanino'], aprobado: false },
+"zoologia": { nombre: "Zoología", tipo: "disciplinario", semestre: 3, prereq: ['biologia'], aprobado: false },
+"fisio": { nombre: "Fisiología Animal", tipo: "disciplinario", semestre: 3, prereq: ['quimica', 'anatCanino'], aprobado: false },
+"medioambiente": { nombre: "Medio Ambiente y Gestión Ambiental", tipo: "disciplinario", semestre: 3, prereq: ['biologia'], aprobado: false },
+"ramo41": { nombre: "Ramo Simulado 4-1", tipo: "disciplinario", semestre: 4, prereq: ['ramo31'], aprobado: false },
+"ramo42": { nombre: "Ramo Simulado 4-2", tipo: "disciplinario", semestre: 4, prereq: ['ramo31'], aprobado: false },
+"ramo43": { nombre: "Ramo Simulado 4-3", tipo: "profesional", semestre: 4, prereq: ['ramo32'], aprobado: false },
+"ramo44": { nombre: "Ramo Simulado 4-4", tipo: "disciplinario", semestre: 4, prereq: ['ramo33'], aprobado: false },
+"ramo45": { nombre: "Ramo Simulado 4-5", tipo: "disciplinario", semestre: 4, prereq: ['ramo34'], aprobado: false },
+"ramo51": { nombre: "Ramo Simulado 5-1", tipo: "disciplinario", semestre: 5, prereq: ['ramo41'], aprobado: false },
+"ramo52": { nombre: "Ramo Simulado 5-2", tipo: "disciplinario", semestre: 5, prereq: ['ramo41'], aprobado: false },
+"ramo53": { nombre: "Ramo Simulado 5-3", tipo: "profesional", semestre: 5, prereq: ['ramo42'], aprobado: false },
+"ramo54": { nombre: "Ramo Simulado 5-4", tipo: "disciplinario", semestre: 5, prereq: ['ramo43'], aprobado: false },
+"ramo55": { nombre: "Ramo Simulado 5-5", tipo: "disciplinario", semestre: 5, prereq: ['ramo44'], aprobado: false },
+"ramo61": { nombre: "Ramo Simulado 6-1", tipo: "disciplinario", semestre: 6, prereq: ['ramo51'], aprobado: false },
+"ramo62": { nombre: "Ramo Simulado 6-2", tipo: "disciplinario", semestre: 6, prereq: ['ramo51'], aprobado: false },
+"ramo63": { nombre: "Ramo Simulado 6-3", tipo: "profesional", semestre: 6, prereq: ['ramo52'], aprobado: false },
+"ramo64": { nombre: "Ramo Simulado 6-4", tipo: "disciplinario", semestre: 6, prereq: ['ramo53'], aprobado: false },
+"ramo65": { nombre: "Ramo Simulado 6-5", tipo: "disciplinario", semestre: 6, prereq: ['ramo54'], aprobado: false },
+"ramo71": { nombre: "Ramo Simulado 7-1", tipo: "disciplinario", semestre: 7, prereq: ['ramo61'], aprobado: false },
+"ramo72": { nombre: "Ramo Simulado 7-2", tipo: "disciplinario", semestre: 7, prereq: ['ramo61'], aprobado: false },
+"ramo73": { nombre: "Ramo Simulado 7-3", tipo: "profesional", semestre: 7, prereq: ['ramo62'], aprobado: false },
+"ramo74": { nombre: "Ramo Simulado 7-4", tipo: "disciplinario", semestre: 7, prereq: ['ramo63'], aprobado: false },
+"ramo75": { nombre: "Ramo Simulado 7-5", tipo: "disciplinario", semestre: 7, prereq: ['ramo64'], aprobado: false },
+"ramo81": { nombre: "Ramo Simulado 8-1", tipo: "disciplinario", semestre: 8, prereq: ['ramo71'], aprobado: false },
+"ramo82": { nombre: "Ramo Simulado 8-2", tipo: "disciplinario", semestre: 8, prereq: ['ramo71'], aprobado: false },
+"ramo83": { nombre: "Ramo Simulado 8-3", tipo: "profesional", semestre: 8, prereq: ['ramo72'], aprobado: false },
+"ramo84": { nombre: "Ramo Simulado 8-4", tipo: "disciplinario", semestre: 8, prereq: ['ramo73'], aprobado: false },
+"ramo85": { nombre: "Ramo Simulado 8-5", tipo: "disciplinario", semestre: 8, prereq: ['ramo74'], aprobado: false },
+"ramo91": { nombre: "Ramo Simulado 9-1", tipo: "disciplinario", semestre: 9, prereq: ['ramo81'], aprobado: false },
+"ramo92": { nombre: "Ramo Simulado 9-2", tipo: "disciplinario", semestre: 9, prereq: ['ramo81'], aprobado: false },
+"ramo93": { nombre: "Ramo Simulado 9-3", tipo: "profesional", semestre: 9, prereq: ['ramo82'], aprobado: false },
+"ramo94": { nombre: "Ramo Simulado 9-4", tipo: "disciplinario", semestre: 9, prereq: ['ramo83'], aprobado: false },
+"ramo95": { nombre: "Ramo Simulado 9-5", tipo: "disciplinario", semestre: 9, prereq: ['ramo84'], aprobado: false },
+"ramo101": { nombre: "Ramo Simulado 10-1", tipo: "disciplinario", semestre: 10, prereq: ['ramo91'], aprobado: false },
+"ramo102": { nombre: "Ramo Simulado 10-2", tipo: "disciplinario", semestre: 10, prereq: ['ramo91'], aprobado: false },
+"ramo103": { nombre: "Ramo Simulado 10-3", tipo: "profesional", semestre: 10, prereq: ['ramo92'], aprobado: false },
+"ramo104": { nombre: "Ramo Simulado 10-4", tipo: "disciplinario", semestre: 10, prereq: ['ramo93'], aprobado: false },
+"ramo105": { nombre: "Ramo Simulado 10-5", tipo: "disciplinario", semestre: 10, prereq: ['ramo94'], aprobado: false },
+};
 
-    <!-- SEMESTRE 1 -->
-    <div class="semestre">
-      <h2>Semestre 1</h2>
-      <div class="ramo general" id="comunicacion" onclick="aprobar('comunicacion')">Taller de Comunicación Oral y Escrita</div>
-      <div class="ramo general" id="matematica" onclick="aprobar('matematica')">Matemática General</div>
-      <div class="ramo profesional" id="introduccion" onclick="aprobar('introduccion')">Introducción a la Medicina Veterinaria</div>
-      <div class="ramo disciplinario" id="biologia" onclick="aprobar('biologia')">Biología Celular</div>
-      <div class="ramo disciplinario" id="quimica" onclick="aprobar('quimica')">Química</div>
-    </div>
 
-    <!-- SEMESTRE 2 -->
-    <div class="semestre">
-      <h2>Semestre 2</h2>
-      <div class="ramo general" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
-      <div class="ramo general bloqueado" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística</div>
-      <div class="ramo profesional" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
-      <div class="ramo disciplinario" id="histo" onclick="aprobar('histo')">Histoembriología</div>
-      <div class="ramo disciplinario bloqueado" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica</div>
-    </div>
+function aprobar(id) {
+  const ramo = document.getElementById(id);
+  if (ramo.classList.contains('bloqueado')) return;
+  ramos[id].aprobado = true;
+  ramo.classList.add('aprobado');
+  for (let key in ramos) {
+    const datos = ramos[key];
+    const div = document.getElementById(key);
+    if (datos.aprobado || !datos.prereq?.length) continue;
+    const requisitosOk = datos.prereq.every(pr => ramos[pr]?.aprobado);
+    if (requisitosOk) div.classList.remove('bloqueado');
+  }
+}
 
-  </div>
-
-  <script>
-    const ramos = {
-      // Semestre 1
-      comunicacion: { aprobado: false, prereq: [] },
-      matematica: { aprobado: false, prereq: [] },
-      introduccion: { aprobado: false, prereq: [] },
-      biologia: { aprobado: false, prereq: [] },
-      quimica: { aprobado: false, prereq: [] },
-      // Semestre 2
-      ingles1: { aprobado: false, prereq: [] },
-      bioestadistica: { aprobado: false, prereq: ['matematica'] },
-      anatCanino: { aprobado: false, prereq: [] },
-      histo: { aprobado: false, prereq: [] },
-      bioquimica: { aprobado: false, prereq: ['quimica'] }
-    };
-
-    function aprobar(id) {
-      const ramo = document.getElementById(id);
-      if (ramo.classList.contains('bloqueado')) return;
-
-      ramos[id].aprobado = true;
-      ramo.classList.add('aprobado');
-
-      for (let key in ramos) {
-        const datos = ramos[key];
-        const div = document.getElementById(key);
-        if (datos.aprobado || !datos.prereq?.length) continue;
-
-        const requisitosOk = datos.prereq.every(pr => ramos[pr].aprobado);
-        if (requisitosOk) {
-          div.classList.remove('bloqueado');
-        }
-      }
+window.onload = () => {
+  for (let key in ramos) {
+    const div = document.getElementById(key);
+    const datos = ramos[key];
+    if (datos.prereq?.length > 0) {
+      const requisitosOk = datos.prereq.every(pr => ramos[pr]?.aprobado);
+      if (!requisitosOk) div.classList.add('bloqueado');
     }
-
-    // Al cargar la página, dejar en gris los que tienen requisitos no cumplidos
-    window.onload = () => {
-      for (let key in ramos) {
-        const div = document.getElementById(key);
-        const datos = ramos[key];
-
-        if (datos.prereq?.length > 0) {
-          const requisitosOk = datos.prereq.every(pr => ramos[pr].aprobado);
-          if (!requisitosOk) {
-            div.classList.add('bloqueado');
-          }
-        }
-      }
-    };
-  </script>
+  }
+};
+</script>
 </body>
 </html>
+
+
