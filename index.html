@@ -2,32 +2,68 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Malla Curricular Interactiva - Veterinaria</title>
+  <title>Malla Curricular Interactiva - Medicina Veterinaria</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 40px;
+    }
+
     .ramo {
-      padding: 10px;
-      margin: 10px 0;
+      padding: 12px 16px;
+      margin: 8px 0;
       border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
       color: white;
-      font-weight: bold;
+      transition: all 0.3s ease;
     }
-    .bloqueado { opacity: 0.5; cursor: not-allowed; }
-    .general { background-color: #4a90e2; }     /* Azul: Ámbito General */
-    .profesional { background-color: #d0021b; } /* Rojo: Ámbito Profesional */
-    .disciplinario { background-color: #417505; } /* Verde: Ámbito Disciplinario */
-    .aprobado { text-decoration: line-through; background-color: #7ed321 !important; }
+
+    .bloqueado {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .aprobado {
+      text-decoration: line-through;
+      background-color: #7ed321 !important;
+      color: #000 !important;
+    }
+
+    .general { background-color: #4a90e2; }       /* Azul */
+    .profesional { background-color: #d0021b; }   /* Rojo */
+    .disciplinario { background-color: #417505; } /* Verde */
   </style>
 </head>
-<body>
-  <h2>🧪 Semestre 1 - Medicina Veterinaria</h2>
 
+<body>
+  <h1>📘 Malla Curricular Medicina Veterinaria</h1>
+
+  <!-- SEMESTRE 1 -->
+  <h2>🧪 Semestre 1</h2>
   <div class="ramo general" id="comunicacion" onclick="aprobar('comunicacion')">Taller de Comunicación Oral y Escrita</div>
   <div class="ramo general" id="matematica" onclick="aprobar('matematica')">Matemática General</div>
   <div class="ramo profesional" id="introduccion" onclick="aprobar('introduccion')">Introducción a la Medicina Veterinaria</div>
   <div class="ramo disciplinario" id="biologia" onclick="aprobar('biologia')">Biología Celular</div>
   <div class="ramo disciplinario" id="quimica" onclick="aprobar('quimica')">Química</div>
+
+  <!-- SEMESTRE 2 -->
+  <h2>📗 Semestre 2</h2>
+  <div class="ramo general bloqueado oculto" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
+  <div class="ramo general bloqueado oculto" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística (req: Matemática)</div>
+  <div class="ramo profesional bloqueado oculto" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
+  <div class="ramo disciplinario bloqueado oculto" id="histo" onclick="aprobar('histo')">Histomorfobiología</div>
+  <div class="ramo disciplinario bloqueado oculto" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica (req: Química)</div>
 
   <script>
     const ramos = {
@@ -35,29 +71,12 @@
       matematica: { aprobado: false },
       introduccion: { aprobado: false },
       biologia: { aprobado: false },
-      quimica: { aprobado: false }
-    };
-
-    function aprobar(id) {
-      const ramo = document.getElementById(id);
-      if (ramo.classList.contains('bloqueado')) return;
-      ramos[id].aprobado = true;
-      ramo.classList.add('aprobado');
-    }
-  </script>
-</body>
-  const ramos = {
-      comunicacion: { aprobado: false },
-      matematica: { aprobado: false },
-      introduccion: { aprobado: false },
-      biologia: { aprobado: false },
       quimica: { aprobado: false },
-      // Semestre 2
-      ingles1: { aprobado: false, siguiente: [] },
-      bioestadistica: { aprobado: false, prereq: ['matematica'], siguiente: [] },
-      anatCanino: { aprobado: false, prereq: [], siguiente: [] },
-      histo: { aprobado: false, prereq: [], siguiente: [] },
-      bioquimica: { aprobado: false, prereq: ['quimica'], siguiente: [] }
+      ingles1: { aprobado: false, prereq: [] },
+      bioestadistica: { aprobado: false, prereq: ['matematica'] },
+      anatCanino: { aprobado: false, prereq: [] },
+      histo: { aprobado: false, prereq: [] },
+      bioquimica: { aprobado: false, prereq: ['quimica'] }
     };
 
     function aprobar(id) {
@@ -66,7 +85,6 @@
       ramos[id].aprobado = true;
       ramo.classList.add('aprobado');
 
-      // Revisa si se pueden desbloquear ramos con prerequisitos
       for (let key in ramos) {
         const ramoData = ramos[key];
         const div = document.getElementById(key);
@@ -78,7 +96,7 @@
         }
       }
 
-      // Desbloquea ramos sin prerequisitos ocultos
+      // Mostrar automáticamente los sin prerequisitos
       for (let key in ramos) {
         const div = document.getElementById(key);
         if (!ramos[key].prereq && div.classList.contains('oculto')) {
@@ -86,11 +104,16 @@
         }
       }
     }
-</html>
-<h2>📘 Semestre 2 - Medicina Veterinaria</h2>
 
-<div class="ramo general bloqueado" id="ingles1" onclick="aprobar('ingles1')">Inglés I</div>
-<div class="ramo general bloqueado oculto" id="bioestadistica" onclick="aprobar('bioestadistica')">Bioestadística (req: Matemática)</div>
-<div class="ramo profesional bloqueado oculto" id="anatCanino" onclick="aprobar('anatCanino')">Anatomía del Canino</div>
-<div class="ramo disciplinario bloqueado oculto" id="histo" onclick="aprobar('histo')">Histomorfobiología</div>
-<div class="ramo disciplinario bloqueado oculto" id="bioquimica" onclick="aprobar('bioquimica')">Bioquímica (req: Química)</div>
+    // Mostrar ramos sin prerequisitos al cargar
+    window.onload = () => {
+      for (let key in ramos) {
+        const div = document.getElementById(key);
+        if (!ramos[key].prereq && div.classList.contains('oculto')) {
+          div.classList.remove('oculto', 'bloqueado');
+        }
+      }
+    };
+  </script>
+</body>
+</html>
